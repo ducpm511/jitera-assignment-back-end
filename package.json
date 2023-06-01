@@ -7,8 +7,8 @@
     "start": "ts-node-dev --respawn --transpile-only --exit-child src/app.ts",
     "build": "tsc -p .",
     "typeorm": "typeorm-ts-node-commonjs",
-    "migrate": "del -rf build && yarn build && yarn typeorm migration:generate ./src/migrations/added-entity -d ./src/utils/data-source.ts",
-    "db:push": "del -rf build && yarn build && yarn typeorm migration:run -d src/utils/data-source.ts",
+    "migrate": "rmdir build && yarn build && yarn typeorm migration:generate ./src/migrations/added-entity -d ./src/utils/data-source.ts",
+    "db:push": "rmdir build && yarn build && yarn typeorm migration:run -d src/utils/data-source.ts",
     "dev": "tsc-watch --onSuccess \"node ./build/src/app.js\""
   },
   "keywords": [],

@@ -8,6 +8,8 @@ import { AppDataSource } from './utils/data-source';
 import AppError from './utils/appError';
 import authRouter from './routes/auth.routes';
 import userRouter from './routes/user.routes';
+import bidItemRouter from './routes/bidItem.routes';
+import bidRouter from './routes/bid.routes';
 import validateEnv from './utils/validateEnv';
 import redisClient from './utils/connectRedis';
 
@@ -42,6 +44,8 @@ AppDataSource.initialize()
     // ROUTES
     app.use('/api/auth', authRouter);
     app.use('/api/users', userRouter);
+    app.use('/api/bid-item', bidItemRouter);
+    app.use('/api/bid', bidRouter);
 
     // HEALTH CHECKER
     app.get('/api/healthChecker', async (_, res: Response) => {

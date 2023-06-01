@@ -37,6 +37,11 @@ export class User extends Model {
         default: false,
     })
     verified: boolean;
+    @Column({
+        default: 0,
+        nullable: true
+    })
+    ballance: number;
     // ? Hash password before saving to database
     @BeforeInsert()
     async hashPassword() {
