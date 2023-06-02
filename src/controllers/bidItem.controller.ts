@@ -4,6 +4,7 @@ import {
     DeleteBidItemInput,
     GetBidItemInput,
     UpdateBidItemInput,
+    GetBidItemsByStatusInput
 } from '../schemas/bidItem.schema';
 import { createBidItem, findBidItems, getBidItem } from '../services/bidItem.service';
 import AppError from '../utils/appError';
@@ -68,6 +69,25 @@ export const getBidItemsHandler = async (
 ) => {
     try {
         const bidItems = await findBidItems({}, {}, {});
+
+        res.status(200).json({
+            status: 'success',
+            data: {
+                bidItems,
+            },
+        });
+    } catch (err: any) {
+        next(err);
+    }
+};
+
+export const getBidItemsByStatusHandler = async (
+    req: Request<GetBidItemsByStatusInput>,
+    res: Response,
+    next: NextFunction
+) => {
+    try {
+        const bidItems = await findBidItems({status: req.body.status}, {}, {});
 
         res.status(200).json({
             status: 'success',

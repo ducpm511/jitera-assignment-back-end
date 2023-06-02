@@ -42,7 +42,16 @@ export const deleteBidItemSchema = object({
   ...params,
 });
 
+export const getBidItemsByStatusSchema = object({
+  body: object({
+    status: string({
+      required_error: "Status is required"
+    })
+  })
+})
+
 export type CreateBidItemInput = TypeOf<typeof createBidItemSchema>['body'];
 export type GetBidItemInput = TypeOf<typeof getBidItemSchema>['params'];
 export type UpdateBidItemInput = TypeOf<typeof updateBidItemSchema>;
 export type DeleteBidItemInput = TypeOf<typeof deleteBidItemSchema>['params'];
+export type GetBidItemsByStatusInput = TypeOf<typeof getBidItemsByStatusSchema>['body'];

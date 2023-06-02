@@ -3,6 +3,7 @@ import {
     createBidItemHandler,
     deleteBidItemHandler,
     getBidItemHandler,
+    getBidItemsByStatusHandler,
     getBidItemsHandler,
     updateBidItemHandler,
 } from '../controllers/bidItem.controller';
@@ -14,6 +15,7 @@ import {
     deleteBidItemSchema,
     getBidItemSchema,
     updateBidItemSchema,
+    getBidItemsByStatusSchema
 } from '../schemas/bidItem.schema';
 
 const router = express.Router();
@@ -23,6 +25,9 @@ router
     .route('/')
     .post(validate(createBidItemSchema), createBidItemHandler)
     .get(getBidItemsHandler);
+router
+    .route('/filter')
+    .get(validate(getBidItemsByStatusSchema), getBidItemsByStatusHandler)
 
 router
     .route('/:bidItemId')
