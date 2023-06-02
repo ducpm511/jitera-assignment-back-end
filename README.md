@@ -37,12 +37,12 @@ npm start
 
 The backend server will start running at http://localhost:8000.
 
-API Documentation
+API Documentation:
 The API documentation is available at /api-docs. You can access it in your browser by navigating to http://localhost:8000/api-docs. It provides detailed information about the available API endpoints, request/response schemas, and examples.
 
-Contributing
+Contributing:
 Contributions are welcome! If you have any suggestions, bug reports, or feature requests, please open an issue or submit a pull request.
 
-License
+License:
 This project is licensed under the MIT License.
 
