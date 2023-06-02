@@ -13,6 +13,8 @@ import bidRouter from './routes/bid.routes';
 import validateEnv from './utils/validateEnv';
 import redisClient from './utils/connectRedis';
 import corsOptionsDelegate from './middleware/cors';
+import swaggerJSDoc from "swagger-jsdoc";
+import swaggerUi from "swagger-ui-express";
 
 AppDataSource.initialize()
   .then(async () => {
@@ -21,6 +23,7 @@ AppDataSource.initialize()
 
     const app = express();
 
+    const port = config.get<number>('port');
     // TEMPLATE ENGINE
 
     // MIDDLEWARE
@@ -42,6 +45,26 @@ AppDataSource.initialize()
     app.use('/api/users', userRouter);
     app.use('/api/bid-item', bidItemRouter);
     app.use('/api/bid', bidRouter);
+
+    // API Docs
+    const options = {
+      definition: {
+        openapi: "3.0.1",
+        info: {
+          title: "Jitera Assignment API Docs",
+          version: "1.0.0",
+        },
+        schemes: ["http"],
+        servers: [{ url: `http://localhost:${port}/api` }],
+      },
+      apis: [
+        `${__dirname}/routes/*.ts`,
+        "./build/src/routes/*.js",
+      ],
+    };
+    const swaggerSpec = swaggerJSDoc(options);
+
+    app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
     // HEALTH CHECKER
     app.get('/api/healthChecker', async (_, res: Response) => {
@@ -71,7 +94,7 @@ AppDataSource.initialize()
       }
     );
 
-    const port = config.get<number>('port');
+    
     app.listen(port);
 
     console.log(`Server started on port: ${port}`);

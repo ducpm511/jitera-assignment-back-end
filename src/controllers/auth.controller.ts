@@ -48,7 +48,6 @@ export const registerUserHandler = async (
             email: email.toLowerCase(),
             password,
         });
-        console.log(user);
         res.status(201).json({
             status: 'success',
             data: {
