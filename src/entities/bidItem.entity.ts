@@ -15,17 +15,20 @@ export class BidItem extends Model{
     name: string;
 
     @Column({
-        default: 0
+        default: 0,
+        type: 'float'
     })
     startedPrice: number;
 
     @Column({
-        default: 0
+        default: 0,
+        type: 'float'
     })
     currentPrice: number;
 
     @Column({
-        default: 0
+        default: 0,
+        type: 'float'
     })
     timeWindow: number;
 

@@ -41,6 +41,8 @@ export const createBidHandler = async (
         }
         if (!user) {
             return next(new AppError(404, 'Cannot find user with that id'));
+        }else if(user.ballance < bidItem.currentPrice){
+            return next(new AppError(400, 'User balance is not enough'));
         } else {
             isValidUser = true
         }

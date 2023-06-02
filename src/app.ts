@@ -12,6 +12,7 @@ import bidItemRouter from './routes/bidItem.routes';
 import bidRouter from './routes/bid.routes';
 import validateEnv from './utils/validateEnv';
 import redisClient from './utils/connectRedis';
+import corsOptionsDelegate from './middleware/cors';
 
 AppDataSource.initialize()
   .then(async () => {
@@ -34,12 +35,7 @@ AppDataSource.initialize()
     app.use(cookieParser());
 
     // 4. Cors
-    app.use(
-      cors({
-        origin: config.get<string>('origin'),
-        credentials: true,
-      })
-    );
+    app.use(cors(corsOptionsDelegate));
 
     // ROUTES
     app.use('/api/auth', authRouter);

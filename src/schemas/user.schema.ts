@@ -1,4 +1,4 @@
-import { object, string, TypeOf, z } from 'zod';
+import { number, object, string, TypeOf, z } from 'zod';
 import { RoleEnumType } from '../entities/user.entity';
 
 export const createUserSchema = object({
@@ -35,10 +35,26 @@ export const loginUserSchema = object({
   }),
 });
 
+const params = {
+  params: object({
+    userId: string(),
+  }),
+};
+
+export const depositSchema = object({
+  ...params,
+  body: object({
+    ballance: number({
+      required_error: 'Balance amount is required',
+    })
+  }),
+});
+
 export type CreateUserInput = Omit<
   TypeOf<typeof createUserSchema>['body'],
   'passwordConfirm'
 >;
 
 export type LoginUserInput = TypeOf<typeof loginUserSchema>['body'];
+export type DepositInput = TypeOf<typeof depositSchema>;
 
