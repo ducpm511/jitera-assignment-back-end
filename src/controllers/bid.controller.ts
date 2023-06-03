@@ -51,10 +51,14 @@ export const createBidHandler = async (
             if (!bid) {
                 const newBid = await createBid(req.body);
                 let bidItemObj = bidItem;
+                let updatedUser = user;
                 if (newBid) {
                     bidItemObj.currentPrice = newBid.bidPrice;
+                    updatedUser.ballance = user.ballance - newBid.bidPrice;
                     Object.assign(bidItem, bidItemObj);
                     await bidItem.save();
+                    Object.assign(user, updatedUser);
+                    await user.save();
                 }
 
                 // console.log(newBid);

@@ -87,7 +87,7 @@ export const getBidItemsByStatusHandler = async (
     next: NextFunction
 ) => {
     try {
-        const bidItems = await findBidItems({status: req.body.status}, {}, {});
+        const bidItems = await findBidItems({status: req.params.status}, {}, {});
 
         res.status(200).json({
             status: 'success',

@@ -5,7 +5,7 @@ export enum StatusEnumType {
     DRAFT = 'draft',
     PUBLISHED = 'published',
     ONGOING = 'on_going',
-    COMPLETED = 'conpleted'
+    COMPLETED = 'completed'
 }
 @Entity('bidItems')
 export class BidItem extends Model{

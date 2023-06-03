@@ -26,7 +26,7 @@ router
     .post(validate(createBidItemSchema), createBidItemHandler)
     .get(getBidItemsHandler);
 router
-    .route('/filter')
+    .route('/:status')
     .get(validate(getBidItemsByStatusSchema), getBidItemsByStatusHandler)
 
 router
